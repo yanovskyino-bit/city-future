@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Печиво_В_Стакані CityFuture — Транспорт • Архітектура • Екологія</title>
+  <style>
+    /* -------------------- Base / Reset -------------------- */
+    :root{
+      --bg:#06060a;
+      --card:#0f1117;
+      --muted:#9aa0a6;
+      --accent1:#00f0ff; /* cyan */
+      --accent2:#ff00d0; /* magenta */
+      --glass: rgba(255,255,255,0.04);
+      --radius:16px;
+      --maxw:1100px;
+      --glass-2: rgba(255,255,255,0.02);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(0,240,255,0.04), transparent), radial-gradient(800px 400px at 90% 90%, rgba(255,0,208,0.04), transparent), var(--bg); color:#e9f0ff}
+    a{color:inherit}
+    img{max-width:100%;display:block}
+
+    /* -------------------- Layout -------------------- */
+    header{padding:24px 16px;border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter: blur(6px)}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+    nav{display:flex;gap:18px;align-items:center}
+    .brand{font-weight:700;letter-spacing:0.6px;display:flex;align-items:center;gap:12px}
+    .brand .logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent1),var(--accent2));box-shadow:0 6px 30px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;font-weight:700;color:#021}
+
+    /* menu */
+    .menu{margin-left:auto;display:flex;gap:10px}
+    .menu a{padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--muted);font-size:0.95rem;transition:all .18s;}
+    .menu a:hover{color:var(--accent1);transform:translateY(-3px);text-shadow:0 4px 20px rgba(0,240,255,0.08)}
+
+    main{padding:36px 0}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:var(--radius);box-shadow: 0 10px 40px rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.03)}
+    h1{font-size:clamp(1.6rem,2.8vw,2.4rem);margin:0 0 10px}
+    p.lead{color:var(--muted);margin:0 0 18px}
+    .cta{display:inline-flex;gap:12px;align-items:center}
+    .btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:12px 18px;border-radius:12px;color:#031; font-weight:700;border:none;cursor:pointer;box-shadow:0 8px 30px rgba(255,0,200,0.06);transition:transform .15s}
+    .btn:hover{transform:translateY(-4px)}
+
+    /* hero visual */
+    .panel{padding:16px;border-radius:12px;background:linear-gradient(180deg,var(--glass),transparent);display:flex;flex-direction:column;gap:12px}
+    .stats{display:flex;gap:12px;flex-wrap:wrap}
+    .stat{flex:1;min-width:120px;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border:1px solid rgba(255,255,255,0.02)}
+    .stat strong{display:block;font-size:1.2rem}
+
+    /* sections */
+    section.content{margin-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--card);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.02)}
+    .card h3{margin:0 0 8px}
+    .card p{color:var(--muted);margin:0}
+
+    /* gallery */
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
+    .gallery figure{background:var(--glass-2);padding:10px;border-radius:10px;text-align:center}
+    .gallery figcaption{font-size:0.82rem;color:var(--muted);margin-top:8px}
+
+    /* interactive */
+    .interactive{margin-top:26px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:18px;border-radius:14px}
+    .controls{display:flex;gap:12px;flex-wrap:wrap}
+    .toggle{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+    .toggle:hover{transform:translateY(-2px)}
+
+    /* footer */
+    footer{margin-top:40px;padding:22px;border-top:1px solid rgba(255,255,255,0.03)}
+    .footer-grid{display:flex;gap:20px;flex-wrap:wrap}
+    .small{color:var(--muted);font-size:0.9rem}
+
+    /* neon accents */
+    .neon-accent{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .glow{filter:drop-shadow(0 6px 22px rgba(0,240,255,0.06))}
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      section.content{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:480px){
+      .menu{display:none}
+      header{padding:14px}
+      .brand{gap:8px}
+      .gallery{grid-template-columns:1fr}
+      .btn{padding:10px 14px}
+    }
+
+    /* small touches */
+    .credit{font-size:0.82rem;color:var(--muted)}
+    .kbd{background:#071019;padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);font-weight:600}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand">
+          <div class="logo">☕</div>
+          <div>
+            <div style="font-size:0.92rem">Печиво_В_Стакані</div>
+            <div style="font-size:0.72rem;color:var(--muted)">CityFuture — Візія майбутнього</div>
+          </div>
+        </div>
+
+        <div class="menu">
+          <a href="#transport">Транспорт</a>
+          <a href="#architecture">Архітектура</a>
+          <a href="#ecology">Екологія</a>
+          <a href="#gallery">Галерея</a>
+          <a href="#interactive">Інтерактив</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-card">
+        <h1 class="neon-accent">Місто майбутнього: транспорт • архітектура • екологія</h1>
+        <p class="lead">Концепція інтегрованого міського простору, де рух, простір і природа співіснують завдяки дизайну, технології та людській увазі. Адаптивне, неонове — але тепле всередині.</p>
+        <div class="cta">
+          <button class="btn" id="exploreBtn">Дослідити візію</button>
+          <button class="btn" id="paletteBtn" title="Змінити палітру">Палітра</button>
+        </div>
+
+        <div style="margin-top:18px" class="panel">
+          <div class="stats">
+            <div class="stat"><small class="small">Енергія</small><strong id="stat-energy">72%</strong><div class="credit">Відновлювальні джерела</div></div>
+            <div class="stat"><small class="small">Безпека</small><strong id="stat-safety">94%</strong><div class="credit">Інтелектуальна інфраструктура</div></div>
+            <div class="stat"><small class="small">Зелень</small><strong id="stat-green">46%</strong><div class="credit">Покриття деревами</div></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel" aria-label="візуалізація міста">
+        <!-- Simple SVG 'image' placeholders with alt text and captions -->
+        <figure style="margin:0">
+          <svg viewBox="0 0 300 200" width="100%" height="160" role="img" aria-labelledby="svg1title">
+            <title id="svg1title">Неонова лінія метро над містом — ілюстрація</title>
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#00f0ff" />
+                <stop offset="1" stop-color="#ff00d0" />
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="#051018" rx="12"/>
+            <g stroke="url(#g1)" stroke-width="3" fill="none">
+              <path d="M10 160 C70 90, 130 90, 190 160" />
+              <path d="M20 120 C80 50, 140 50, 200 120" opacity="0.6"/>
+            </g>
+            <circle cx="240" cy="40" r="18" fill="#ff00d0" opacity="0.9" />
+          </svg>
+          <figcaption class="credit">Надземний рельсовий транспорт — автор: AI-плейсхолдер</figcaption>
+        </figure>
+      </aside>
+    </section>
+
+    <!-- 3 змістові розділи -->
+    <section class="content" aria-label="Три ключові теми">
+      <article class="card" id="transport">
+        <h3 class="neon-accent">Транспорт — інтегрований рух</h3>
+        <p>Мульти-рівнева мережа: автономні мікромобілі, надземні рельси, велокарети та міський транзит на електричній енергії. У фокусі — безпечний перехід між режимами та збереження простору для пішоходів.</p>
+        <p class="credit" style="margin-top:10px">Акценти: адаптивні маршрути, місцеві енергообміни, зони з низькими викидами.</p>
+      </article>
+
+      <article class="card" id="architecture">
+        <h3 class="neon-accent">Архітектура — міста як екосистема</h3>
+        <p>Будівлі-активи: фасади з живими рослинами, фасиліті для спільного використання, мікрокліматичні маніпулятори, які зменшують потребу в раціональному опаленні/охолодженні.</p>
+        <p class="credit" style="margin-top:10px">Акценти: біофільний дизайн, матеріали з низьким вуглецевим слідом, енергоефективні фасади.</p>
+      </article>
+
+      <article class="card" id="ecology">
+        <h3 class="neon-accent">Екологія — відновлювальна міська природа</h3>
+        <p>Мережа міської природи: коридори для дикої природи, вертикальні сади, системи очищення дощових стоків, реконструкція ґрунту та міські ферми. Показники стійкості вимірюються відкритими датасетами.</p>
+        <p class="credit" style="margin-top:10px">Акценти: вода в циклі, біорізноманіття, місцеве виробництво їжі.</p>
+      </article>
+    </section>
+
+    <!-- Міні-галерея -->
+    <section id="gallery">
+      <h2 style="margin-top:28px">Міні-галерея</h2>
+      <div class="gallery" aria-live="polite">
+        <figure>
+          <!-- stylized svg image -->
+          <svg viewBox="0 0 200 120" width="100%" height="90" role="img" aria-labelledby="gimg1">
+            <title id="gimg1">Електричний дрон-доставник над містом</title>
+            <rect width="100%" height="100%" rx="8" fill="#041524" />
+            <g stroke="#00f0ff" fill="#00f0ff" opacity="0.9">
+              <rect x="40" y="60" width="70" height="20" rx="4" />
+              <circle cx="55" cy="55" r="3" />
+              <circle cx="95" cy="55" r="3" />
+            </g>
+          </svg>
+          <figcaption>Дрон-доставка — кредит: AI-плейсхолдер</figcaption>
+        </figure>
+
+        <figure>
+          <svg viewBox="0 0 200 120" width="100%" height="90" role="img" aria-labelledby="gimg2">
+            <title id="gimg2">Вертикальна ферма у фасаді будівлі</title>
+            <rect width="100%" height="100%" rx="8" fill="#03151a" />
+            <g fill="#7fffd4" opacity="0.95">
+              <rect x="20" y="28" width="20" height="60" rx="3" />
+              <rect x="60" y="18" width="20" height="70" rx="3" />
+              <rect x="100" y="38" width="20" height="50" rx="3" />
+            </g>
+          </svg>
+          <figcaption>Вертикальна ферма — кредит: AI-плейсхолдер</figcaption>
+        </figure>
+
+        <figure>
+          <svg viewBox="0 0 200 120" width="100%" height="90" role="img" aria-labelledby="gimg3">
+            <title id="gimg3">Система очищення дощової води</title>
+            <rect width="100%" height="100%" rx="8" fill="#02121a" />
+            <g stroke="#b0eaff" fill="#b0eaff">
+              <path d="M30 90 Q60 40 110 90" stroke-width="3" fill="none" />
+              <circle cx="140" cy="70" r="8" />
+            </g>
+          </svg>
+          <figcaption>Стічна фільтрація — кредит: AI-плейсхолдер</figcaption>
+        </figure>
+
+        <figure>
+          <svg viewBox="0 0 200 120" width="100%" height="90" role="img" aria-labelledby="gimg4">
+            <title id="gimg4">Публічний простір з мікромобільністю</title>
+            <rect width="100%" height="100%" rx="8" fill="#041018" />
+            <g fill="#ff8ad6">
+              <rect x="30" y="60" width="40" height="18" rx="4" />
+              <rect x="90" y="50" width="60" height="24" rx="4" />
+            </g>
+          </svg>
+          <figcaption>Публічний простір — кредит: AI-плейсхолдер</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Інтерактив -->
+    <section id="interactive" class="interactive">
+      <h2>Інтерактив: модель міста</h2>
+      <p class="small">Пограйтеся з трьома повзунками — вони демонструють, як зміни впливають на ресурси міста. Клікайте кнопки для швидкої дії.</p>
+
+      <div style="display:flex;gap:12px;align-items:center;margin-top:12px;flex-wrap:wrap">
+        <div style="flex:2;min-width:240px">
+          <label>Густота транспорту: <span id="val-traffic">40</span>%</label>
+          <input type="range" id="traffic" min="0" max="100" value="40" />
+
+          <label>Зелена покривність: <span id="val-green">46</span>%</label>
+          <input type="range" id="green" min="0" max="100" value="46" />
+
+          <label>Відновлювані джерела: <span id="val-energy">72</span>%</label>
+          <input type="range" id="energy" min="0" max="100" value="72" />
+
+          <div class="controls" style="margin-top:10px">
+            <button class="toggle" id="optimize">Оптимізувати</button>
+            <button class="toggle" id="randomize">Випадково</button>
+            <button class="toggle" id="reset">Скинути</button>
+          </div>
+        </div>
+
+        <div style="flex:1;min-width:200px">
+          <div style="padding:12px;border-radius:10px;background:#061018;border:1px solid rgba(255,255,255,0.02)">
+            <div style="font-weight:700">Показники моделі</div>
+            <div style="margin-top:8px">Викиди: <span id="metric-pollution">--</span></div>
+            <div>Комфорт: <span id="metric-comfort">--</span></div>
+            <div>Продуктивність: <span id="metric-efficiency">--</span></div>
+            <div style="margin-top:10px"><small class="credit">Порада: натисніть «Оптимізувати» для автоматичного балансу.</small></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Як я використовував ШІ -->
+    <section style="margin-top:26px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:18px;border-radius:12px" id="ai-use">
+      <h2>Як я використовував ШІ</h2>
+      <p class="small">Нижче наведено промпт, який я використав(ла) для генерації ідей, композицій та візуальних підказок. Ви можете скопіювати його і використовувати у власних інструментах ШІ, або змінити розділи для окремих тем (транспорт/архітектура/екологія) без переходу на інші сайти.</p>
+
+      <details open>
+        <summary style="cursor:pointer">Промпт (скопіюйте — він повністю тут)</summary>
+        <pre style="white-space:pre-wrap;background:#02131a;padding:12px;border-radius:10px;margin-top:10px;color:#cfeffd">Напиши код html для показати бачення транспорту, архітектури та екології майбутнього. Обов’язкові секції: Hero, 3 змістові розділи, Міні-галерея, Інтерактив (JS без бекенду), Footer, «Як я використовував ШІ». з стилем неон-future Один файл &lt;Печиво_В_Стакані&gt;_CityFuture.html (вбудовані CSS/JS, без фреймворків). Семантика: header, nav, main, section, footer. Адаптивність (читабельно на телефоні). Мінімум 2 акцентні кольори, hover-ефекти на меню/кнопках. Зображення: 3–4 з alt та короткими підписами-кредитами. Секція «Як я використовував ШІ» ( ТУТ написати цей промпт) Зроби його знучним у використанні, можливо з різними відділами для теми, щоб не треба було переходити на них без переходячи на інші сайти/сторінки</pre>
+      </details>
+
+      <p class="small" style="margin-top:10px">Примітка: я використав(ла) ШІ для — генерації структури, мовних формулювань і ідей для ілюстрацій; картинки в галереї — це прості SVG-макети (placeholder). Ви можете підмінити SVG на реальні зображення або вивантажити AI-генеровані ілюстрації і зберегти авторство в підписах.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div style="font-weight:700">Печиво_В_Стакані</div>
+          <div class="small">CityFuture — демонстраційна сторінка</div>
+        </div>
+        <div class="small">Використано акценти: <span class="kbd">cyan</span> та <span class="kbd">magenta</span></div>
+        <div class="small">Автор: ви — адаптуйте і поширюйте вільно</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------------- Interactive logic ----------------
+    (()=>{
+      const qs = (s)=>document.querySelector(s);
+      const traffic = qs('#traffic');
+      const green = qs('#green');
+      const energy = qs('#energy');
+      const vT = qs('#val-traffic');
+      const vG = qs('#val-green');
+      const vE = qs('#val-energy');
+      const metricPoll = qs('#metric-pollution');
+      const metricComfort = qs('#metric-comfort');
+      const metricEff = qs('#metric-efficiency');
+
+      function evaluate(){
+        const t = +traffic.value;
+        const g = +green.value;
+        const e = +energy.value;
+        vT.textContent = t;
+        vG.textContent = g;
+        vE.textContent = e;
+
+        // simple model: pollution rises with traffic, drops with green and energy
+        const pollution = Math.max(0, Math.round(t*0.7 - g*0.45 - e*0.2 + 20));
+        const comfort = Math.round((100 - t)*0.4 + g*0.45 + e*0.15);
+        const efficiency = Math.round(e*0.6 + (100 - t)*0.2 + g*0.2);
+
+        metricPoll.textContent = pollution + ' (низькі краще)';
+        metricComfort.textContent = comfort + '/100';
+        metricEff.textContent = efficiency + '/100';
+
+        // animate stat bars in hero
+        qs('#stat-energy').textContent = e + '%';
+        qs('#stat-safety').textContent = Math.min(99, Math.round(50 + (100 - t)*0.4 + g*0.3)) + '%';
+        qs('#stat-green').textContent = g + '%';
+      }
+
+      [traffic,green,energy].forEach(el=>el.addEventListener('input', evaluate));
+      evaluate();
+
+      qs('#optimize').addEventListener('click', ()=>{
+        // quick heuristic optimizer
+        traffic.value = 20; green.value = 65; energy.value = 85; evaluate();
+        flash('Оптимізовано ✅');
+      });
+      qs('#randomize').addEventListener('click', ()=>{
+        traffic.value = Math.floor(Math.random()*80);
+        green.value = Math.floor(Math.random()*80);
+        energy.value = Math.floor(40 + Math.random()*60);
+        evaluate();
+        flash('Рандомний стан створено');
+      });
+      qs('#reset').addEventListener('click', ()=>{
+        traffic.value = 40; green.value = 46; energy.value = 72; evaluate();
+        flash('Повернуто до початкових значень');
+      });
+
+      function flash(text){
+        const el = document.createElement('div');
+        el.textContent = text; el.style.position='fixed'; el.style.right='20px'; el.style.bottom='20px'; el.style.background='linear-gradient(90deg,var(--accent1),var(--accent2))'; el.style.color='#021'; el.style.padding='10px 14px'; el.style.borderRadius='10px'; el.style.zIndex=9999; el.style.boxShadow='0 8px 30px rgba(0,0,0,0.6)';
+        document.body.appendChild(el);
+        setTimeout(()=>el.style.opacity='0',1600);
+        setTimeout(()=>el.remove(),2000);
+      }
+
+      // palette swap
+      qs('#paletteBtn').addEventListener('click', ()=>{
+        const r = Math.random();
+        if(r<0.33){
+          document.documentElement.style.setProperty('--accent1','#00f0ff');
+          document.documentElement.style.setProperty('--accent2','#ff00d0');
+        }else if(r<0.66){
+          document.documentElement.style.setProperty('--accent1','#7eff6f');
+          document.documentElement.style.setProperty('--accent2','#00c2ff');
+        }else{
+          document.documentElement.style.setProperty('--accent1','#ffd166');
+          document.documentElement.style.setProperty('--accent2','#9b5cff');
+        }
+        flash('Палітра змінена');
+      });
+
+      // explore button: smooth scroll to content
+      qs('#exploreBtn').addEventListener('click', ()=>{
+        document.querySelector('#transport').scrollIntoView({behavior:'smooth'});
+      });
+
+      // keyboard quick toggles
+      window.addEventListener('keydown', (e)=>{
+        if(e.key==='1') qs('#optimize').click();
+        if(e.key==='2') qs('#randomize').click();
+        if(e.key==='0') qs('#reset').click();
+      });
+    })();
+  </script>
+</body>
+</html>
